@@ -49,13 +49,25 @@ function Header() {
         </div>
       </div>
       <nav className={`main-nav ${isScrolled ? 'scrolled' : ''}`}>
-        <div className="container nav-inner">
+        <div className="container nav-inner-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '15px' }}>
           <Link to="/" className="logo-link" onClick={closeMobileMenu}>
             <img src="/logo.png" alt="Apex Dental Studio Logo" className="nav-logo" />
           </Link>
           
-          <div className="nav-center">
-            <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
+          <div className="nav-right">
+            <Link to="/contact.html" className="nav-btn-solid">Make an Appointment</Link>
+          </div>
+
+          <button className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} aria-label="Toggle Menu" onClick={toggleMobileMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <div className="container nav-inner-bottom" style={{ borderTop: '1px solid #eaeaea', paddingTop: '15px' }}>
+          <div className="nav-center" style={{ margin: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+            <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`} style={{ flex: 1, gap: '25px' }}>
               <li><Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`} onClick={closeMobileMenu}>Home</Link></li>
               <li><Link to="/about" className={`nav-item ${isActive('/about')}`} onClick={closeMobileMenu}>About Us</Link></li>
               <li><Link to="/x-guide" className={`nav-item ${isActive('/x-guide')}`} onClick={closeMobileMenu}>X Guide</Link></li>
@@ -75,20 +87,15 @@ function Header() {
               <li><Link to="/faq.html" className={`nav-item ${isActive('/faq.html')}`} onClick={closeMobileMenu}>FAQ</Link></li>
               <li><Link to="/testimonials.html" className={`nav-item ${isActive('/testimonials.html')}`} onClick={closeMobileMenu}>Testimonials</Link></li>
               <li><Link to="/gallery.html" className={`nav-item ${isActive('/gallery.html')}`} onClick={closeMobileMenu}>Gallery</Link></li>
-              <li><Link to="/blog.html" className={`nav-item ${isActive('/blog.html')}`} onClick={closeMobileMenu}>Blog</Link></li>
               <li><Link to="/contact.html" className={`nav-item ${isActive('/contact.html')}`} onClick={closeMobileMenu}>Contact Us</Link></li>
             </ul>
+            
+            <div className="nav-socials" style={{ display: 'flex', alignItems: 'center' }}>
+              <a href="#" className="social-icon" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+              </a>
+            </div>
           </div>
-
-          <div className="nav-right">
-            <Link to="/contact.html" className="nav-btn-solid">Book Appointment</Link>
-          </div>
-
-          <button className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} aria-label="Toggle Menu" onClick={toggleMobileMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </nav>
     </header>

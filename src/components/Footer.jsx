@@ -76,6 +76,20 @@ function Footer() {
           </button>
         </div>
       </div>
+      
+      <div className="footer-bottom-bar">
+        <div className="container">
+          <div className="footer-bottom-content">
+            <div className="copyright">
+              Copyright &copy; {new Date().getFullYear()} Penndentaldfw. All Rights Reserved Powered By Ameego Labs
+            </div>
+            <div className="footer-bottom-links">
+              <Link to="/privacy-policy">Privacy Policy</Link>
+              <Link to="/contact.html">Contact Us</Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

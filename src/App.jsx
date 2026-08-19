@@ -10,8 +10,6 @@ import Contact from './pages/Contact.jsx';
 import FAQ from './pages/FAQ.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Testimonials from './pages/Testimonials.jsx';
-import Blog from './pages/Blog.jsx';
-import BlogDetail from './pages/BlogDetail.jsx';
 import DentalImplants from './pages/DentalImplants.jsx';
 import SleepApnea from './pages/SleepApnea.jsx';
 import OralSurgery from './pages/OralSurgery.jsx';
@@ -24,8 +22,6 @@ import About from './pages/About.jsx';
 import './style.css';
 
 function App() {
-  const location = useLocation();
-  const isContact = location.pathname === '/contact.html';
 
   return (
     <>
@@ -39,8 +35,6 @@ function App() {
           <Route path="/faq.html" element={<FAQ />} />
           <Route path="/gallery.html" element={<Gallery />} />
           <Route path="/testimonials.html" element={<Testimonials />} />
-          <Route path="/blog.html" element={<Blog />} />
-          <Route path="/blog-detail.html" element={<BlogDetail />} />
           <Route path="/services/dental-implants" element={<DentalImplants />} />
           <Route path="/services/sleep-apnea" element={<SleepApnea />} />
           <Route path="/services/oral-surgery" element={<OralSurgery />} />
@@ -50,7 +44,7 @@ function App() {
           <Route path="/x-guide" element={<XGuide />} />
         </Routes>
       </main>
-      {!isContact && <Footer />}
+      <Footer />
     </>
   );
 }

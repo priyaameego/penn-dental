@@ -5,7 +5,7 @@ import '../contact.css';
 
 function Contact() {
   useScrollAnimation();
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', date: '', time: '', service: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
@@ -20,8 +20,8 @@ function Contact() {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' });
-      alert('Your message has been sent successfully. We will get back to you shortly!');
+      setFormData({ name: '', email: '', phone: '', date: '', time: '', service: '', message: '' });
+      alert('Your appointment request has been sent successfully. We will get back to you shortly!');
     }, 1500);
   };
 
@@ -82,7 +82,7 @@ function Contact() {
           
           <div className="contact-hero-content animate-on-scroll slide-right">
             <h5>Contact</h5>
-            <h1>Get in touch with us …<br/>Send Your Message</h1>
+            <h1>Get in touch with us …<br/>Schedule An Appointment</h1>
             
             <div className="contact-map" style={{ marginTop: '30px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', transition: 'transform 0.4s ease' }} onMouseOver={(e) => e.currentTarget.style.transform='translateY(-5px)'} onMouseOut={(e) => e.currentTarget.style.transform='none'}>
               <iframe src="https://www.google.com/maps?ll=32.744281,-96.845085&z=16&t=m&hl=en-US&gl=US&mapclient=embed&cid=14229109341497883976&output=embed" width="100%" height="400" style={{ border: 0 }} allowFullScreen="" loading="lazy"></iframe>
@@ -91,7 +91,7 @@ function Contact() {
 
           <div className="contact-form-wrapper animate-on-scroll slide-left">
             <div className="contact-form-container" style={{ transition: 'transform 0.4s ease, box-shadow 0.4s ease' }} onMouseOver={(e) => { e.currentTarget.style.transform='translateY(-5px)'; e.currentTarget.style.boxShadow='var(--shadow-xl)'; }} onMouseOut={(e) => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='var(--shadow-lg)'; }}>
-              <h2>Send a message</h2>
+              <h2>Schedule An Appointment</h2>
               <form onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
@@ -123,13 +123,24 @@ function Contact() {
                   </div>
                 </div>
 
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" className="form-control" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Time</label>
+                    <input type="time" className="form-control" value={formData.time} onChange={e => setFormData({...formData, time: e.target.value})} />
+                  </div>
+                </div>
+
                 <div className="form-group">
-                  <label>Your Message</label>
+                  <label>Additional Notes</label>
                   <textarea className="form-control" placeholder="How can we help you?" value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})}></textarea>
                 </div>
 
                 <button type="submit" className="btn-submit" disabled={isSubmitting}>
-                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  <span>{isSubmitting ? 'Sending...' : 'Schedule Appointment'}</span>
                 </button>
               </form>
             </div>
@@ -137,61 +148,7 @@ function Contact() {
         </div>
       </section>
 
-      {/* Custom Footer for Contact Page */}
-      <footer className="contact-footer">
-        <div className="container">
-          <div className="contact-footer-grid">
-            <div className="footer-col">
-              <h3>SHORTCUTS</h3>
-              <ul>
-                <li><Link to="#">Implants</Link></li>
-                <li><Link to="#">Filling</Link></li>
-                <li><Link to="#">Veneers</Link></li>
-                <li><Link to="#">Root Canal Treatment</Link></li>
-                <li><Link to="#">Orthodontics</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h3>SERVICES</h3>
-              <ul>
-                <li><Link to="#">Root Canal Treatment</Link></li>
-                <li><Link to="#">Bridges</Link></li>
-                <li><Link to="#">Exam & Cleaning</Link></li>
-                <li><Link to="#">Laser Dentistry</Link></li>
-                <li><Link to="#">Sleep Dentistry</Link></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h3>WORKING HOURS</h3>
-              <div className="working-hours-list">
-                <div>Mon, Tues: <span>8:30 to 6:00</span></div>
-                <div>Wed: <span>8:00 to 1:00</span></div>
-                <div>Thursday: <span>8:00 to 5:00</span></div>
-                <div>Fri, Sat & Sun: <span>Closed</span></div>
-              </div>
-            </div>
-            <div className="footer-col">
-              <h3>PENN DENTAL</h3>
-              <p style={{ color: '#a0b1ff', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '15px' }}>
-                Penn Dental and Implant Center is a private practice dedicated to creating a world-class dental practice in our community.
-              </p>
-              <div className="working-hours-list">
-                <div>Phone: <span>214-942-0101</span></div>
-                <div style={{ flexDirection: 'column' }}>Address: <span style={{ marginTop: '5px' }}>1418 W. Jefferson Blvd, Dallas, TX</span></div>
-              </div>
-            </div>
-          </div>
-          <div className="contact-footer-bottom">
-            <div className="copyright">
-              &copy; {new Date().getFullYear()} Penn Dental and Implant Center. All Rights Reserved.
-            </div>
-            <div className="footer-bottom-links">
-              <Link to="#">Privacy Policy</Link>
-              <Link to="/contact.html">Contact Us</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+
     </>
   );
 }
