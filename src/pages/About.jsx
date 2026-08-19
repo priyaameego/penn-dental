@@ -572,6 +572,8 @@ const About = () => {
             }
             .progress-bar {
               height: 100%;
+              width: 0;
+              transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
               background: repeating-linear-gradient(
                 45deg,
                 #3664ff,
@@ -581,6 +583,9 @@ const About = () => {
               );
               border-radius: 10px;
               position: relative;
+            }
+            .is-visible .progress-bar {
+              width: var(--target-width);
             }
             .progress-percent {
               position: absolute;
@@ -694,7 +699,7 @@ const About = () => {
                 <div className="skill-item">
                   <span className="skill-name">X-Guide™ Technology for Implant Surgery</span>
                   <div className="progress-bg">
-                    <div className="progress-bar" style={{ width: '98%' }}>
+                    <div className="progress-bar" style={{ '--target-width': '98%' }}>
                       <span className="progress-percent">98%</span>
                     </div>
                   </div>
@@ -702,7 +707,7 @@ const About = () => {
                 <div className="skill-item">
                   <span className="skill-name">Cosmetic Dentistry</span>
                   <div className="progress-bg">
-                    <div className="progress-bar" style={{ width: '90%' }}>
+                    <div className="progress-bar" style={{ '--target-width': '90%' }}>
                       <span className="progress-percent">90%</span>
                     </div>
                   </div>
@@ -710,7 +715,7 @@ const About = () => {
                 <div className="skill-item">
                   <span className="skill-name">X-rays Technology</span>
                   <div className="progress-bg">
-                    <div className="progress-bar" style={{ width: '90%' }}>
+                    <div className="progress-bar" style={{ '--target-width': '90%' }}>
                       <span className="progress-percent">90%</span>
                     </div>
                   </div>
@@ -718,7 +723,7 @@ const About = () => {
                 <div className="skill-item">
                   <span className="skill-name">Orthodontics</span>
                   <div className="progress-bg">
-                    <div className="progress-bar" style={{ width: '88%' }}>
+                    <div className="progress-bar" style={{ '--target-width': '88%' }}>
                       <span className="progress-percent">88%</span>
                     </div>
                   </div>
@@ -726,7 +731,7 @@ const About = () => {
                 <div className="skill-item">
                   <span className="skill-name">Others</span>
                   <div className="progress-bg">
-                    <div className="progress-bar" style={{ width: '83%' }}>
+                    <div className="progress-bar" style={{ '--target-width': '83%' }}>
                       <span className="progress-percent">83%</span>
                     </div>
                   </div>
