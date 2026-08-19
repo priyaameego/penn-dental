@@ -594,6 +594,23 @@ const About = () => {
               padding: 4px 12px;
               border-radius: 20px;
             }
+            @media (max-width: 768px) {
+              .skill-name {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+              }
+              .progress-bg {
+                width: calc(100% - 40px);
+              }
+              .progress-percent {
+                transform: translate(100%, -50%);
+                font-size: 0.75rem;
+                padding: 3px 8px;
+              }
+              .skills-col {
+                padding-right: 15px;
+              }
+            }
           `}
         </style>
         <div className="premium-features-container">
