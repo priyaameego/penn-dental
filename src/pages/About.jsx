@@ -1,7 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import '../about.css'; // Make sure to import the CSS
+
+const AnimatedCounter = ({ end, duration = 2000, suffix = '' }) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const counterRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeProgress * end));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(end);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [isVisible, end, duration]);
+
+  return <span ref={counterRef}>{count}{suffix}</span>;
+};
 
 const About = () => {
   useScrollAnimation();
@@ -297,7 +338,7 @@ const About = () => {
             .stats-grid-premium {
               display: grid;
               grid-template-columns: repeat(2, 1fr);
-              gap: 30px;
+              gap: 20px;
               max-width: 1100px;
               margin: 0 auto;
               padding: 0 20px;
@@ -336,27 +377,36 @@ const About = () => {
               font-weight: 400;
               letter-spacing: 0.5px;
             }
+            @media (max-width: 767px) {
+              .stat-number-card {
+                font-size: 2.2rem;
+                padding: 25px 0;
+              }
+              .stat-label-premium {
+                font-size: 0.85rem;
+              }
+            }
           `}
         </style>
         <div className="container">
           <div className="stats-grid-premium">
             <div className="stat-card-wrapper animate-on-scroll fade-up">
-              <div className="stat-number-card">15+</div>
+              <div className="stat-number-card"><AnimatedCounter end={15} suffix="+" /></div>
               <div className="stat-label-premium">Years of Experience</div>
             </div>
             
             <div className="stat-card-wrapper animate-on-scroll fade-up" style={{ transitionDelay: '100ms' }}>
-              <div className="stat-number-card">2</div>
+              <div className="stat-number-card"><AnimatedCounter end={2} /></div>
               <div className="stat-label-premium">Professional Dentists</div>
             </div>
             
             <div className="stat-card-wrapper animate-on-scroll fade-up" style={{ transitionDelay: '200ms' }}>
-              <div className="stat-number-card">5k</div>
+              <div className="stat-number-card"><AnimatedCounter end={5} suffix="k" /></div>
               <div className="stat-label-premium">Happy Patients</div>
             </div>
             
             <div className="stat-card-wrapper animate-on-scroll fade-up" style={{ transitionDelay: '300ms' }}>
-              <div className="stat-number-card">20</div>
+              <div className="stat-number-card"><AnimatedCounter end={20} /></div>
               <div className="stat-label-premium">Awards Winner</div>
             </div>
           </div>
